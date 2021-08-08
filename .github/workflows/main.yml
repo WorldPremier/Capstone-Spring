@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: clone repo
+        run: |
+         git clone https://github.com/WorldPremier/Capstone-React.git
+
+    
+      - name: Build frontend
+        working-directory: Capstone-React
+        env:
+          CI: ""
+        run: |
+         npm install
+         npm run build
+         
+      - name: copy directory
+        run: |
+          cp -r Capstone-React/build ./
+          ls
+          
+      - name: move into resources
+        run: |
+          mv build/* src/main/resources/static
+          ls src/main/resources/static
+          
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "capstone-movie"
+          heroku_email: "franklynreyes777@yahoo.com"
