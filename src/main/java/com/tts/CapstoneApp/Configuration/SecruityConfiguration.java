@@ -65,13 +65,13 @@ public class SecruityConfiguration extends WebSecurityConfigurerAdapter {
                         oAuth2UserService.processOAuthPostLogin(oAuth2User.getAttribute("sub"));
 
 
-                        response.sendRedirect("http://localhost:3000/");
+                        response.sendRedirect("https://capstone-movie.herokuapp.com/");
                     }
 
                 })
                 .and()
                 .logout()
-                .logoutSuccessUrl("http://localhost:3000/");
+                .logoutSuccessUrl("https://capstone-movie.herokuapp.com/");
 
 
     }
@@ -79,7 +79,7 @@ public class SecruityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000"));
+        configuration.setAllowedOrigins(List.of("https://capstone-movie.herokuapp.com/"));
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
         configuration.setAllowCredentials(true);
