@@ -40,6 +40,7 @@ public class SecruityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/static/**").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/console/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
